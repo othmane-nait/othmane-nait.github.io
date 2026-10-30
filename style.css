@@ -30,30 +30,24 @@ body {
   min-height: 100vh;
 }
 
-/* Fixed, softly blurred background image */
+/* 100% sharp background image - NO BLUR */
 body::before {
   content: "";
   position: fixed;
   inset: 0;
   z-index: -2;
   background: url("assets/background.jpg") center / cover no-repeat;
-  filter: blur(5px) brightness(1.05) saturate(1.05);
-  transform: scale(1.08); /* hides the blurred edges */
+  transform: scale(1.02); /* Prevents edge artifacts */
   pointer-events: none;
 }
 
-/* Soft white veil keeps text readable everywhere */
+/* Very light veil so the image isn't too harsh */
 body::after {
   content: "";
   position: fixed;
   inset: 0;
   z-index: -1;
-  background: linear-gradient(
-    180deg,
-    rgba(255, 255, 255, 0.82) 0%,
-    rgba(255, 255, 255, 0.70) 50%,
-    rgba(255, 255, 255, 0.82) 100%
-  );
+  background: rgba(255, 255, 255, 0.15); 
   pointer-events: none;
 }
 
@@ -69,9 +63,7 @@ img { max-width: 100%; display: block; }
 /* ---------- Navigation ---------- */
 .nav {
   position: fixed; inset: 0 0 auto 0; z-index: 50;
-  background: rgba(255, 255, 255, .72);
-  backdrop-filter: blur(14px);
-  -webkit-backdrop-filter: blur(14px);
+  background: rgba(255, 255, 255, 0.95); /* Solid background, no blur */
   border-bottom: 1px solid rgba(230, 235, 242, .9);
 }
 .nav-inner {
@@ -96,6 +88,15 @@ img { max-width: 100%; display: block; }
   padding: 150px 24px 90px;
   display: grid; grid-template-columns: 1.12fr .88fr;
   gap: 48px; align-items: center; min-height: 92vh;
+}
+
+/* Solid white panel for the hero text */
+.hero-text {
+  background: rgba(255, 255, 255, 0.95);
+  padding: 40px;
+  border-radius: 24px;
+  box-shadow: 0 8px 32px rgba(15, 23, 42, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.5);
 }
 
 /* staggered slide-in from the left for each text block */
@@ -143,8 +144,7 @@ h1 { font-size: clamp(2.3rem, 5.2vw, 3.7rem); }
   background:
     radial-gradient(circle at 32% 28%, rgba(37, 99, 235, .32), transparent 62%),
     radial-gradient(circle at 72% 74%, rgba(6, 182, 212, .28), transparent 62%);
-  filter: blur(30px);
-  animation: breathe 9s ease-in-out infinite;
+  animation: breathe 9s ease-in-out infinite; /* Blur removed here too */
 }
 .hero-photo img {
   position: relative; z-index: 1;
@@ -156,16 +156,24 @@ h1 { font-size: clamp(2.3rem, 5.2vw, 3.7rem); }
     float 7s ease-in-out 1.35s infinite;
 }
 
-/* ---------- Sections ---------- */
+/* ---------- Sections (Solid White Panels) ---------- */
 .section {
-  max-width: var(--maxw); margin: 0 auto;
-  padding: 84px 24px; scroll-margin-top: 84px;
+  max-width: var(--maxw);
+  margin: 32px auto;
+  padding: 72px 48px;
+  scroll-margin-top: 84px;
+  background: rgba(255, 255, 255, 0.95); /* Solid background, no blur */
+  border-radius: 24px;
+  box-shadow: 0 8px 32px rgba(15, 23, 42, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.5);
 }
+
 .band {
-  background: rgba(246, 248, 252, 0.66);
-  border-top: 1px solid var(--line);
-  border-bottom: 1px solid var(--line);
+  background: transparent;
+  border: none;
+  padding: 0;
 }
+
 .section h2 { font-size: clamp(1.6rem, 3vw, 2.15rem); margin-bottom: 26px; }
 .body-text { color: var(--muted); max-width: 68ch; margin: 0 0 14px; }
 
@@ -178,7 +186,7 @@ h1 { font-size: clamp(2.3rem, 5.2vw, 3.7rem); }
 .pitch {
   margin-top: 36px; padding: 24px 26px;
   border: 2px dashed #d3dceb; border-radius: var(--radius);
-  background: rgba(255, 255, 255, .6);
+  background: rgba(246, 248, 252, 0.8);
   display: flex; flex-wrap: wrap; align-items: center;
   justify-content: space-between; gap: 16px;
 }
@@ -236,7 +244,7 @@ h1 { font-size: clamp(2.3rem, 5.2vw, 3.7rem); }
   gap: 16px;
 }
 .skill-card {
-  background: #fff; border: 1px solid var(--line);
+  background: #f8fafc; border: 1px solid var(--line);
   border-radius: 16px; padding: 22px;
 }
 .skill-card h3 { font-size: .95rem; margin-bottom: 14px; }
@@ -246,7 +254,7 @@ h1 { font-size: clamp(2.3rem, 5.2vw, 3.7rem); }
   display: flex; gap: 18px; align-items: flex-start;
   padding: 28px; border-radius: var(--radius);
   border: 2px dashed #d3dceb;
-  background: rgba(255, 255, 255, .6);
+  background: rgba(246, 248, 252, 0.8);
 }
 .placeholder .dot {
   width: 10px; height: 10px; border-radius: 50%;
@@ -257,7 +265,12 @@ h1 { font-size: clamp(2.3rem, 5.2vw, 3.7rem); }
 .placeholder p { margin: 0; color: var(--muted); font-size: .95rem; max-width: 70ch; }
 
 /* ---------- Footer / contact ---------- */
-.footer { background: #0b1220; color: #c7d2e2; padding: 72px 24px 40px; margin-top: 40px; }
+.footer { 
+  background: #0b1220; 
+  color: #c7d2e2; 
+  padding: 72px 24px 40px; 
+  margin-top: 40px; 
+}
 .footer-inner { max-width: var(--maxw); margin: 0 auto; }
 .footer h2 { color: #fff; font-size: clamp(1.6rem, 3vw, 2.15rem); margin-bottom: 12px; }
 .eyebrow-light { color: #6ea8ff; }
@@ -293,7 +306,6 @@ h1 { font-size: clamp(2.3rem, 5.2vw, 3.7rem); }
   from { opacity: 0; transform: translateX(70px); }
   to   { opacity: 1; transform: translateX(0); }
 }
-@keyframes fadeIn { from { opacity: 0; transform: scale(.97); } to { opacity: 1; transform: scale(1); } }
 @keyframes float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-10px); } }
 @keyframes breathe { 0%, 100% { opacity: .85; transform: scale(1); } 50% { opacity: 1; transform: scale(1.06); } }
 
@@ -303,13 +315,14 @@ h1 { font-size: clamp(2.3rem, 5.2vw, 3.7rem); }
     grid-template-columns: 1fr; gap: 40px;
     padding-top: 120px; padding-bottom: 60px; min-height: 0; text-align: center;
   }
-  .hero-text { order: 2; }
+  .hero-text { order: 2; padding: 24px; }
   .hero-photo { order: 1; width: min(250px, 64vw); }
   .hero-actions { justify-content: center; }
   .lead { margin-left: auto; margin-right: auto; }
 }
 @media (max-width: 720px) {
   .nav-links li:not(:last-child) { display: none; }
+  .section { padding: 48px 24px; margin: 16px auto; }
 }
 
 /* ---------- Reduced motion ---------- */
