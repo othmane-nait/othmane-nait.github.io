@@ -30,25 +30,30 @@ body {
   min-height: 100vh;
 }
 
-/* Sharp, clear background image */
+/* Fixed, softly blurred background image */
 body::before {
   content: "";
   position: fixed;
   inset: 0;
   z-index: -2;
   background: url("assets/background.jpg") center / cover no-repeat;
-  filter: blur(1px) brightness(0.98); /* 1px blur just to smooth it out slightly */
-  transform: scale(1.02); /* Prevents edge artifacts */
+  filter: blur(5px) brightness(1.05) saturate(1.05);
+  transform: scale(1.08); /* hides the blurred edges */
   pointer-events: none;
 }
 
-/* Very light veil so the image isn't too harsh */
+/* Soft white veil keeps text readable everywhere */
 body::after {
   content: "";
   position: fixed;
   inset: 0;
   z-index: -1;
-  background: rgba(255, 255, 255, 0.15); 
+  background: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0.82) 0%,
+    rgba(255, 255, 255, 0.70) 50%,
+    rgba(255, 255, 255, 0.82) 100%
+  );
   pointer-events: none;
 }
 
@@ -91,17 +96,6 @@ img { max-width: 100%; display: block; }
   padding: 150px 24px 90px;
   display: grid; grid-template-columns: 1.12fr .88fr;
   gap: 48px; align-items: center; min-height: 92vh;
-}
-
-/* Frosted glass effect for the hero text */
-.hero-text {
-  background: rgba(255, 255, 255, 0.8);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
-  padding: 40px;
-  border-radius: 24px;
-  box-shadow: 0 8px 32px rgba(15, 23, 42, 0.06);
-  border: 1px solid rgba(255, 255, 255, 0.5);
 }
 
 /* staggered slide-in from the left for each text block */
@@ -162,27 +156,16 @@ h1 { font-size: clamp(2.3rem, 5.2vw, 3.7rem); }
     float 7s ease-in-out 1.35s infinite;
 }
 
-/* ---------- Sections (with Frosted Glass) ---------- */
+/* ---------- Sections ---------- */
 .section {
-  max-width: var(--maxw);
-  margin: 32px auto;
-  padding: 72px 48px;
-  scroll-margin-top: 84px;
-  background: rgba(255, 255, 255, 0.8);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
-  border-radius: 24px;
-  box-shadow: 0 8px 32px rgba(15, 23, 42, 0.06);
-  border: 1px solid rgba(255, 255, 255, 0.5);
+  max-width: var(--maxw); margin: 0 auto;
+  padding: 84px 24px; scroll-margin-top: 84px;
 }
-
 .band {
-  /* Removed the background so the glass section card is the main element */
-  background: transparent;
-  border: none;
-  padding: 0;
+  background: rgba(246, 248, 252, 0.66);
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
 }
-
 .section h2 { font-size: clamp(1.6rem, 3vw, 2.15rem); margin-bottom: 26px; }
 .body-text { color: var(--muted); max-width: 68ch; margin: 0 0 14px; }
 
@@ -274,12 +257,7 @@ h1 { font-size: clamp(2.3rem, 5.2vw, 3.7rem); }
 .placeholder p { margin: 0; color: var(--muted); font-size: .95rem; max-width: 70ch; }
 
 /* ---------- Footer / contact ---------- */
-.footer { 
-  background: #0b1220; 
-  color: #c7d2e2; 
-  padding: 72px 24px 40px; 
-  margin-top: 40px; 
-}
+.footer { background: #0b1220; color: #c7d2e2; padding: 72px 24px 40px; margin-top: 40px; }
 .footer-inner { max-width: var(--maxw); margin: 0 auto; }
 .footer h2 { color: #fff; font-size: clamp(1.6rem, 3vw, 2.15rem); margin-bottom: 12px; }
 .eyebrow-light { color: #6ea8ff; }
@@ -315,6 +293,7 @@ h1 { font-size: clamp(2.3rem, 5.2vw, 3.7rem); }
   from { opacity: 0; transform: translateX(70px); }
   to   { opacity: 1; transform: translateX(0); }
 }
+@keyframes fadeIn { from { opacity: 0; transform: scale(.97); } to { opacity: 1; transform: scale(1); } }
 @keyframes float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-10px); } }
 @keyframes breathe { 0%, 100% { opacity: .85; transform: scale(1); } 50% { opacity: 1; transform: scale(1.06); } }
 
@@ -324,14 +303,13 @@ h1 { font-size: clamp(2.3rem, 5.2vw, 3.7rem); }
     grid-template-columns: 1fr; gap: 40px;
     padding-top: 120px; padding-bottom: 60px; min-height: 0; text-align: center;
   }
-  .hero-text { order: 2; padding: 24px; }
+  .hero-text { order: 2; }
   .hero-photo { order: 1; width: min(250px, 64vw); }
   .hero-actions { justify-content: center; }
   .lead { margin-left: auto; margin-right: auto; }
 }
 @media (max-width: 720px) {
   .nav-links li:not(:last-child) { display: none; }
-  .section { padding: 48px 24px; margin: 16px auto; }
 }
 
 /* ---------- Reduced motion ---------- */
