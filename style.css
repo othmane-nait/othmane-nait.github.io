@@ -463,3 +463,9 @@ h1 { font-size: clamp(2.3rem, 5.2vw, 3.7rem); }
 /* stagger the three cards like Skills */
 .activities-grid [data-reveal]:nth-child(2) { transition-delay: .06s; }
 .activities-grid [data-reveal]:nth-child(3) { transition-delay: .12s; }
+
+.hero-photo {
+  transition: transform .35s cubic-bezier(.2, .7, .2, 1);
+  transform-style: preserve-3d;
+  will-change: transform;
+}
