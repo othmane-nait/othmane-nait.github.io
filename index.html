@@ -109,21 +109,59 @@
       </section>
     </div>
 
-    <!-- ===== International Mobility ===== -->
+        <!-- ===== International Mobility ===== -->
     <section id="mobility" class="section">
       <div data-reveal>
         <p class="eyebrow">03</p>
         <h2>International Mobility</h2>
+      </div>
+
+      <!-- Flight map: Casablanca → Toulouse -->
+      <div class="mobility-map" data-reveal role="img" aria-label="Plane flying from Casablanca to Toulouse">
+        <svg viewBox="0 0 600 200">
+          <defs>
+            <path id="mobilityPath" d="M 60 150 Q 300 30 540 90" />
+          </defs>
+
+          <!-- dotted flight path -->
+          <use href="#mobilityPath" class="flight-path" />
+
+          <!-- Casablanca -->
+          <g class="city">
+            <circle cx="60" cy="150" r="5" />
+            <text x="60" y="180" text-anchor="middle">Casablanca</text>
+          </g>
+
+          <!-- Toulouse -->
+          <g class="city city-dest">
+            <circle class="pulse" cx="540" cy="90" r="6" />
+            <circle cx="540" cy="90" r="5" />
+            <text x="540" y="120" text-anchor="middle">Toulouse</text>
+          </g>
+
+          <!-- plane -->
+          <g class="plane">
+            <path d="M0 2 L28 10 L0 18 L6 10 Z" />
+            <animateMotion dur="5s" repeatCount="indefinite" rotate="auto" calcMode="linear">
+              <mpath href="#mobilityPath" />
+            </animateMotion>
+            <animate attributeName="opacity" values="0;1;1;0" keyTimes="0;0.1;0.9;1"
+                     dur="5s" repeatCount="indefinite" />
+          </g>
+        </svg>
+      </div>
+
+      <div data-reveal>
         <p class="body-text">
-          I am already an international student. Moving from Casablanca, Morocco, to Toulouse, France, was a major step in both my personal and academic life. 
+          I am already an international student. Moving from Casablanca, Morocco, to Toulouse, France, was a major step in both my personal and academic life.
           Studying abroad has given me a global perspective, adaptability, and the ability to thrive in diverse, multicultural environments.
         </p>
         <p class="body-text">
-          Navigating a new academic system in a different language has strengthened my resilience and communication skills. 
+          Navigating a new academic system in a different language has strengthened my resilience and communication skills.
           This experience fuels my desire to keep exploring international environments, whether through internships abroad or by collaborating on global projects.
         </p>
       </div>
-    </section>
+    </section>    
 
     <!-- ===== Projects ===== -->
     <section id="projects" class="section">
