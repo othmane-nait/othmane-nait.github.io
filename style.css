@@ -419,3 +419,36 @@ h1 { font-size: clamp(2.3rem, 5.2vw, 3.7rem); }
 .civic-body { padding: 20px 22px 24px; }
 .civic-body h3 { font-size: 1.02rem; margin-bottom: 8px; }
 .civic-body p { margin: 0; color: var(--muted); font-size: .93rem; }
+
+/* ---------- Activities ---------- */
+.activities-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 16px;
+}
+.activity-card {
+  background: #fff;
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  padding: 24px;
+  transition: transform .25s ease, box-shadow .25s ease;
+}
+.activity-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 16px 40px rgba(15, 23, 42, .08);
+}
+.activity-tag {
+  display: inline-block;
+  font-size: .72rem;
+  font-weight: 600;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 10px;
+}
+.activity-card h3 { font-size: 1.08rem; margin-bottom: 8px; }
+.activity-card p { margin: 0; color: var(--muted); font-size: .93rem; }
+
+/* stagger the three cards like Skills */
+.activities-grid [data-reveal]:nth-child(2) { transition-delay: .06s; }
+.activities-grid [data-reveal]:nth-child(3) { transition-delay: .12s; }
