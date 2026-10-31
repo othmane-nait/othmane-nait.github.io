@@ -378,5 +378,25 @@
     // Current year in the footer
     document.getElementById('year').textContent = new Date().getFullYear();
   </script>
+
+  <script>
+    // Subtle cursor tilt on the hero photo
+    const heroPhoto = document.querySelector('.hero-photo');
+    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    if (heroPhoto && !reduceMotion) {
+      window.addEventListener('pointermove', (e) => {
+        const x = (e.clientX / window.innerWidth - 0.5) * 2;   // -1 … 1
+        const y = (e.clientY / window.innerHeight - 0.5) * 2;  // -1 … 1
+        heroPhoto.style.transform =
+          `perspective(900px) rotateY(${x * 5}deg) rotateX(${-y * 5}deg)`;
+      });
+
+      // Reset when the pointer leaves the window
+      window.addEventListener('pointerleave', () => {
+        heroPhoto.style.transform = '';
+      });
+    }
+  </script>
 </body>
 </html>
